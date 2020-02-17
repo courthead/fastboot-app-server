@@ -46,7 +46,7 @@ class ExpressHTTPServer {
     if (this.distPath) {
       app.get('/', fastbootMiddleware);
       app.use(express.static(this.distPath));
-      app.get('/assets/*', function(req, res) {
+      app.get('/assets/*', this.handleStatic404 || function(req, res) {
         res.sendStatus(404);
       });
     }
